@@ -1,0 +1,76 @@
+ERROR - 2024-06-12 13:17:54 --> mysqli_sql_exception: Duplicate entry 'carlos@example.com' for key 'email' in C:\xampp\htdocs\food\system\Database\MySQLi\Connection.php:310
+Stack trace:
+#0 C:\xampp\htdocs\food\system\Database\MySQLi\Connection.php(310): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\xampp\htdocs\food\system\Database\BaseConnection.php(732): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\xampp\htdocs\food\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\xampp\htdocs\food\system\Database\BaseBuilder.php(2333): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\food\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\food\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\food\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\food\app\Database\Seeds\UsuarioSeeder.php(19): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\food\system\Database\Seeder.php(147): App\Database\Seeds\UsuarioSeeder->run()
+#9 C:\xampp\htdocs\food\system\Commands\Database\Seed.php(79): CodeIgniter\Database\Seeder->call('App\\Database\\Se...')
+#10 C:\xampp\htdocs\food\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Seed->run(Array)
+#11 C:\xampp\htdocs\food\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#12 C:\xampp\htdocs\food\system\Boot.php(351): CodeIgniter\CLI\Console->run()
+#13 C:\xampp\htdocs\food\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#14 C:\xampp\htdocs\food\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#15 {main}
+ERROR - 2024-06-12 13:20:55 --> mysqli_sql_exception: Duplicate entry 'carlos@example.com' for key 'email' in C:\xampp\htdocs\food\system\Database\MySQLi\Connection.php:310
+Stack trace:
+#0 C:\xampp\htdocs\food\system\Database\MySQLi\Connection.php(310): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\xampp\htdocs\food\system\Database\BaseConnection.php(732): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\xampp\htdocs\food\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\xampp\htdocs\food\system\Database\BaseBuilder.php(2333): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\food\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\food\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\food\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\food\app\Database\Seeds\UsuarioSeeder.php(19): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\food\system\Database\Seeder.php(147): App\Database\Seeds\UsuarioSeeder->run()
+#9 C:\xampp\htdocs\food\system\Commands\Database\Seed.php(79): CodeIgniter\Database\Seeder->call('App\\Database\\Se...')
+#10 C:\xampp\htdocs\food\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Seed->run(Array)
+#11 C:\xampp\htdocs\food\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#12 C:\xampp\htdocs\food\system\Boot.php(351): CodeIgniter\CLI\Console->run()
+#13 C:\xampp\htdocs\food\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#14 C:\xampp\htdocs\food\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#15 {main}
+ERROR - 2024-06-12 13:24:57 --> mysqli_sql_exception: Duplicate entry 'rike@example.com' for key 'email' in C:\xampp\htdocs\food\system\Database\MySQLi\Connection.php:310
+Stack trace:
+#0 C:\xampp\htdocs\food\system\Database\MySQLi\Connection.php(310): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\xampp\htdocs\food\system\Database\BaseConnection.php(732): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\xampp\htdocs\food\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\xampp\htdocs\food\system\Database\BaseBuilder.php(2333): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\food\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\food\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\food\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\food\app\Database\Seeds\UsuarioSeeder.php(28): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\food\system\Database\Seeder.php(147): App\Database\Seeds\UsuarioSeeder->run()
+#9 C:\xampp\htdocs\food\system\Commands\Database\Seed.php(79): CodeIgniter\Database\Seeder->call('App\\Database\\Se...')
+#10 C:\xampp\htdocs\food\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Seed->run(Array)
+#11 C:\xampp\htdocs\food\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#12 C:\xampp\htdocs\food\system\Boot.php(351): CodeIgniter\CLI\Console->run()
+#13 C:\xampp\htdocs\food\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#14 C:\xampp\htdocs\food\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#15 {main}
+ERROR - 2024-06-12 13:28:33 --> mysqli_sql_exception: Duplicate entry 'zezim@example.com' for key 'email' in C:\xampp\htdocs\food\system\Database\MySQLi\Connection.php:310
+Stack trace:
+#0 C:\xampp\htdocs\food\system\Database\MySQLi\Connection.php(310): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\xampp\htdocs\food\system\Database\BaseConnection.php(732): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\xampp\htdocs\food\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\xampp\htdocs\food\system\Database\BaseBuilder.php(2333): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\food\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\food\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\food\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\food\app\Database\Seeds\UsuarioSeeder.php(18): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\food\system\Database\Seeder.php(147): App\Database\Seeds\UsuarioSeeder->run()
+#9 C:\xampp\htdocs\food\system\Commands\Database\Seed.php(79): CodeIgniter\Database\Seeder->call('App\\Database\\Se...')
+#10 C:\xampp\htdocs\food\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Seed->run(Array)
+#11 C:\xampp\htdocs\food\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#12 C:\xampp\htdocs\food\system\Boot.php(351): CodeIgniter\CLI\Console->run()
+#13 C:\xampp\htdocs\food\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#14 C:\xampp\htdocs\food\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#15 {main}
+CRITICAL - 2024-06-12 13:47:39 --> ErrorException: Cannot use temporary expression in write context
+[Method: GET, Route: admin/usuarios]
+in APPPATH\Controllers\Admin\Usuarios.php on line 12.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
