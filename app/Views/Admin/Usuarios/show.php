@@ -34,12 +34,40 @@
                     </p>
 
                     <p class="card-text">
-                        <strong>Criado:</strong> <?php echo $usuario->criado_em?>                        
+                        <strong>Criado:</strong> <?php echo $usuario->criado_em->humanize()?> 
+                        <!-- O metodo humanize deixa no formato: criado ha '1 semana atras' -->
                     </p>
 
                     <p class="card-text">
-                        <strong>Atualizado:</strong> <?php echo $usuario->atualizado_em?>                        
-                    </p>
+                        <strong>Atualizado:</strong> <?php echo $usuario->atualizado_em->humanize()?>                        
+                    </p>                    
+                    
+                </div>
+
+                <div class="card-footer bg-primary">
+                    <a 
+                        href="<?php echo site_url('admin/usuarios/editar/'.$usuario->id); ?>" 
+                        class="btn btn-dark btn-sm"
+                    >
+                        <i class="mdi mdi-pencil btn-icon-prepend"></i>
+                        Editar
+                    </a>    
+                    
+                    <a 
+                        href="<?php echo site_url('admin/usuarios/excluir/'.$usuario->id); ?>" 
+                        class="btn btn-danger btn-sm"
+                    >
+                        <i class="mdi mdi-trash-can btn-icon-prepend"></i>
+                        Excluir
+                    </a> 
+
+                    <a 
+                        href="<?php echo site_url('admin/usuarios/'); ?>" 
+                        class="btn btn-light btn-sm"
+                    >
+                        <i class="mdi mdi-arrow-left btn-icon-prepend"></i>
+                        Voltar
+                    </a> 
                 </div>
             </div>
         </div>

@@ -46,23 +46,32 @@ class Usuarios extends BaseController {
     $usuario = $this->buscaUsuarioOu404($id);
 
     $data = [
-        'titulo' => "Detalhando o usuário {$usuario->nome}",
-        'usuario' => $usuario,
+      'titulo' => "Detalhando o usuário {$usuario->nome}",
+      'usuario' => $usuario,
     ];
 
     return view('Admin/Usuarios/show', $data);
   }
 
+  public function editar($id = null) {
+    $usuario = $this->buscaUsuarioOu404($id);
 
+    $data = [
+      'titulo' => "Editando o usuário {$usuario->nome}",
+      'usuario' => $usuario,
+    ];
+
+    return view('Admin/Usuarios/editar', $data);
+  }
 
   // @param id $id
   // @return objeto usuario
   private function buscaUsuarioOu404(int $id = null) {
-      if (!$id || !$usuario = $this->usuarioModel->where('id', $id)->first()) {
-          throw \CodeIgniter\Exceptions\PageNotFoundException:: forPageNotFound("Não foi possível encontrar $id");
-      }
+    if (!$id || !$usuario = $this->usuarioModel->where('id', $id)->first()) {
+      throw \CodeIgniter\Exceptions\PageNotFoundException:: forPageNotFound("Não foi possível encontrar $id");
+    }
 
-      return $usuario;
+    return $usuario;
   }    
 }
 
