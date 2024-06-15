@@ -14,11 +14,20 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title"><?php echo esc($titulo)?></h4>       
+                    <?php if (session()->has('errors_model')): ?>
+                        <ul>
+                            <?php foreach (session('errors_model') as $error): ?>
+                                <li class="text-danger"><?php echo esc($error); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+
+                    <h4 class="card-title"><?php echo esc($titulo)?></h4>  
                     
-                    <form class="forms-sample">
+                    <?php echo form_open('admin/usuarios/atualizar/' . $usuario->id, ['method' => 'post']); ?>
                         <?php echo $this->include('Admin/Usuarios/form'); ?>
-                    </form>                                       
+                    <?php echo form_close(); ?>
+                                
                 </div>         
             </div>
         </div>
