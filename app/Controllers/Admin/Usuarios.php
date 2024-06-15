@@ -19,6 +19,8 @@ class Usuarios extends BaseController {
       'usuarios' => $this->usuarioModel->findAll(),
     ];
 
+    // session()->remove('sucesso');
+
     return view('Admin/Usuarios/index', $data);
   }
 
@@ -62,6 +64,18 @@ class Usuarios extends BaseController {
     ];
 
     return view('Admin/Usuarios/editar', $data);
+  }
+
+  public function atualizar($id = null) {
+    if($this->request->getPost()) {  //if($this->request->getMethod() === 'post') {  
+      $usuario = $this->buscaUsuarioOu404($id);
+      $post = $this->request->getPost();
+      $usuario->fill($post);
+      dd($usuario);
+
+    } else {
+      return redirect()->back(); //aqui e onde se coloca o PAGE NOT FOUND
+    }
   }
 
   // @param id $id
