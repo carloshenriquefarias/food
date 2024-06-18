@@ -22,6 +22,11 @@
                 <div class="ui-widget">
                     <input id="query" name="query" placeholder="Digite o nome do usuario" class="form-control bg-light mb-5"/>
                 </div>
+
+                <a href="<?php echo site_url('admin/usuarios/criar'); ?>" class="btn btn-primary btn-md float-right mr-5 text-white" style="text-decoration: none; color: white;">
+                    <i class="mdi mdi-plus btn-icon-prepend" style="color: white;"></i>
+                    Criar usuário
+                </a>
                 
                 <div class="table-responsive">
                 <table class="table table-hover">

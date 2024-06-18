@@ -24,16 +24,15 @@
 
                     <h4 class="card-title"><?php echo esc($titulo)?></h4>  
                     
-                    <?php echo form_open('admin/usuarios/atualizar/' . $usuario->id, ['method' => 'post']); ?>
+                    <?php echo form_open('admin/usuarios/cadastrar'); ?>
                         <?php echo $this->include('Admin/Usuarios/form'); ?>
 
                         <button class="btn btn-light btn-sm">
-                            <a href="<?php echo site_url('admin/usuarios/show/'.$usuario->id); ?>">
+                            <a href="<?php echo site_url('admin/usuarios')?>">
                                 <i class="mdi mdi-arrow-left btn-icon-prepend"></i>
                                 Cancelar
                             </a>  
                         </button>
-                        
                     <?php echo form_close(); ?>
                                 
                 </div>         
