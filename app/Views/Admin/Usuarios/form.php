@@ -2,22 +2,22 @@
 <div class="form-row">
     <div class="form-group col-md-4">
         <label for="nome">Nome</label>
-        <input type="text" class="form-control" name="nome" id="nome" value="<?php echo esc($usuario->nome) ?>" placeholder="Nome">
+        <input type="text" class="form-control" name="nome" id="nome" value="<?php echo old('nome', esc($usuario->nome)) ?>" placeholder="Nome">
     </div>
 
     <div class="form-group col-md-2">
         <label for="cpf">CPF</label>
-        <input type="text" class="form-control cpf" name="cpf" id="cpf" value="<?php echo esc($usuario->cpf) ?>" placeholder="CPF">
+        <input type="text" class="form-control cpf" name="cpf" id="cpf" value="<?php echo old('cpf', esc($usuario->cpf)) ?>" placeholder="CPF">
     </div>
 
     <div class="form-group col-md-3">
         <label for="telefone">Telefone</label>
-        <input type="text" class="form-control sp_celphones" name="telefone" id="telefone" value="<?php echo esc($usuario->telefone) ?>" placeholder="Telefone">
+        <input type="text" class="form-control sp_celphones" name="telefone" id="telefone" value="<?php echo old('telefone', esc($usuario->telefone)) ?>" placeholder="Telefone">
     </div>
 
     <div class="form-group col-md-3">
         <label for="email">Email</label>
-        <input type="email" class="form-control" name="email" id="email" value="<?php echo esc($usuario->email) ?>" placeholder="Email">
+        <input type="email" class="form-control" name="email" id="email" value="<?php echo old('email', esc($usuario->email)) ?>" placeholder="Email">
     </div>
 </div>
 
@@ -36,15 +36,15 @@
         <label for="ativo">Perfil de acesso</label>
         <select class="form-control" name="is_admin" id="ativo">
             <?php if ($usuario->id): ?>
-                <option value="1" <?php echo $usuario->is_admin ? 'selected' : ''; ?>>
+                <option value="1" <?php echo set_select('is_admin', '1'); ?> <?php echo $usuario->is_admin ? 'selected' : ''; ?>  >
                     Administrador
                 </option>
-                <option value="0" <?php echo !$usuario->is_admin ? 'selected' : ''; ?>>
+                <option value="0" <?php echo set_select('is_admin', '0'); ?> <?php echo !$usuario->is_admin ? 'selected' : ''; ?>  >
                     Cliente
                 </option>
             <?php else: ?>
-                <option value="1">Sim</option>
-                <option value="0" selected="">Não</option>
+                <option value="1">Administrador</option>
+                <option value="0" selected="">Cliente</option>
             <?php endif; ?>
         </select>
     </div>
@@ -53,10 +53,10 @@
         <label for="ativo">Ativo</label>
         <select class="form-control" name="ativo" id="ativo">
             <?php if ($usuario->id): ?>
-                <option value="1" <?php echo $usuario->ativo ? 'selected' : ''; ?>>
+                <option value="1" <?php echo set_select('ativo', '1'); ?> <?php echo $usuario->ativo ? 'selected' : ''; ?> >
                     Sim
                 </option>
-                <option value="0" <?php echo !$usuario->ativo ? 'selected' : ''; ?>>
+                <option value="0" <?php echo set_select('ativo', '0'); ?> <?php echo !$usuario->ativo ? 'selected' : ''; ?> >
                     Não
                 </option>
             <?php else: ?>
@@ -73,9 +73,3 @@
     Salvar   
 </button>
 
-<button class="btn btn-light btn-sm">
-    <a href="<?php echo site_url('admin/usuarios/show/'.$usuario->id); ?>">
-        <i class="mdi mdi-arrow-left btn-icon-prepend"></i>
-        Cancelar
-    </a>  
-</button>

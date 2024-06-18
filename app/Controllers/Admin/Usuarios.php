@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Entities\Usuario;
 
 class Usuarios extends BaseController {
   private $usuarioModel;
@@ -44,6 +45,40 @@ class Usuarios extends BaseController {
 
   }
 
+  public function criar() {
+
+    $usuario = new Usuario();
+
+    $data = [
+      'titulo' => "Criando um novo usuário",
+      'usuario' => $usuario,
+    ];
+
+    return view('Admin/Usuarios/criar', $data);
+  }
+
+  public function cadastrar() {
+    if($this->request->getPost()) {  //if($this->request->getMethod() === 'post') {  
+
+      $usuario = new Usuario($this->request->getPost());
+
+      if($this->usuarioModel->protect(false)->save($usuario)) {
+        return redirect()
+          ->to(site_url('admin/usuarios/show/'. $this->usuarioModel->getInsertID()))
+          ->with('sucesso', 'Usuario' . $usuario->nome . ' foi cadastrado com sucesso!');
+
+      } else {
+          return redirect()->back()
+          ->with('errors_model', $this->usuarioModel->errors())
+          ->with('atencao', 'Por favor verifique os erros abaixo')
+          ->withInput();
+      }
+
+    } else {
+      return redirect()->back(); //aqui e onde se coloca o PAGE NOT FOUND
+    }
+  }
+
   public function show($id = null) {
     $usuario = $this->buscaUsuarioOu404($id);
 
@@ -70,13 +105,37 @@ class Usuarios extends BaseController {
     if($this->request->getPost()) {  //if($this->request->getMethod() === 'post') {  
       $usuario = $this->buscaUsuarioOu404($id);
       $post = $this->request->getPost();
+
+      if(empty($post['password'])) {
+        $this->usuarioModel->desabilitarValidacaoSenha();
+        unset($post['password']);
+        unset($post['password_confirmation']);
+      }
+
       $usuario->fill($post);
-      dd($usuario);
+      // dd($usuario);
+
+      if (!$usuario->hasChanged()) {
+        return redirect()->back()->with('info', 'Não há dados para atualizar!');
+      }
+
+      if($this->usuarioModel->protect(false)->save($usuario)) {
+        return redirect()
+          ->to(site_url('admin/usuarios/show/'.$usuario->id))
+          ->with('sucesso', 'Os dados de ' . $usuario->nome . ' foram atualizados com sucesso!');
+
+      } else {
+          return redirect()->back()
+          ->with('errors_model', $this->usuarioModel->errors())
+          ->with('atencao', 'Por favor verifique os erros abaixo')
+          ->withInput();
+      }
 
     } else {
       return redirect()->back(); //aqui e onde se coloca o PAGE NOT FOUND
     }
   }
+
 
   // @param id $id
   // @return objeto usuario

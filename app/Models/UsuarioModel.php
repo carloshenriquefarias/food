@@ -19,25 +19,44 @@ class UsuarioModel extends Model{
         'nome'             => 'required|min_length[3]|alpha_numeric_space|max_length[128]',
         'email'            => 'required|max_length[254]|valid_email|is_unique[usuarios.email]',
         'cpf'              => 'required|exact_length[14]|is_unique[usuarios.cpf]',
+        'telefone'         => 'required',
         'password'         => 'required|max_length[255]|min_length[6]',
-        'password_confirm' => 'required_with[password]|max_length[255]|matches[password]',
+        'password_confirmation' => 'required_with[password]|max_length[255]|matches[password]',
     ];
 
     protected $validationMessages = [
         'nome' => [
-            'required' => 'Este campo e obrigatorio',
+            'required' => 'O campo nome é obrigatorio',
         ],
 
         'email' => [
-            'required' => 'Este campo e obrigatorio',
+            'required' => 'O campo email é obrigatorio',
             'is_unique' => 'Desculpe, este email já existe. Por favor escolha outro.',
         ],
 
+        'telefone' => [
+            'required' => 'O campo telefone é obrigatorio',
+        ],
+
         'cpf' => [
-            'required' => 'Este campo e obrigatorio',
+            'required' => 'O campo CPF é obrigatorio',
             'is_unique' => 'Desculpe, este CPF já existe.',
         ],
     ];
+
+    protected $beforeInsert = ['hashPassword'];
+    protected $beforeUpdate = ['hashPassword'];
+    
+    protected function hashPassword(array $data) {
+        if (isset($data['data']['password'])) {
+            $data['data']['password_hash'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
+            unset($data['data']['password']);  // Remove o campo password original
+            unset($data['data']['password_confirmation']);  // Remove o campo de confirmação
+        }
+
+        return $data;
+    }
+    
 
     // Uso o contoller usuarios ataves do metodo autocomplete
     // @param string $term
@@ -52,5 +71,11 @@ class UsuarioModel extends Model{
                     ->get()
                     ->getResult()
         ;
+    }
+
+    public function desabilitarValidacaoSenha() {
+        
+        unset($this->validationRules['password']);
+        unset($this->validationRules['password_confirmation']);
     }
 }

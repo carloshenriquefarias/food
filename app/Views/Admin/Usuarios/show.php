@@ -33,9 +33,9 @@
                         <strong>Perfil:</strong> <?php echo ($usuario->is_admin ? 'Administrador' : 'Cliente')?>                        
                     </p>
 
+                    <!-- O metodo humanize deixa no formato: criado ha '1 semana atras' -->
                     <p class="card-text">
                         <strong>Criado:</strong> <?php echo $usuario->criado_em->humanize()?> 
-                        <!-- O metodo humanize deixa no formato: criado ha '1 semana atras' -->
                     </p>
 
                     <p class="card-text">
