@@ -54,7 +54,7 @@
                     </a>    
                     
                     <a 
-                        href="<?php echo site_url('admin/usuarios/excluir/'.$usuario->id); ?>" 
+                        href="<?php echo site_url('admin/usuarios/modalExcluir/'.$usuario->id); ?>" 
                         class="btn btn-danger btn-sm"
                     >
                         <i class="mdi mdi-trash-can btn-icon-prepend"></i>
