@@ -38,36 +38,59 @@
                         <strong>Criado:</strong> <?php echo $usuario->criado_em->humanize()?> 
                     </p>
 
-                    <p class="card-text">
-                        <strong>Atualizado:</strong> <?php echo $usuario->atualizado_em->humanize()?>                        
-                    </p>                    
+                    <?php if ($usuario->deletado_em === null): ?>
+                        <p class="card-text">
+                            <strong>Atualizado:</strong> <?php echo $usuario->atualizado_em->humanize(); ?>
+                        </p>
+                    <?php else: ?>
+                        <p class="card-text text-danger">
+                            <strong>Excluído:</strong> <?php echo $usuario->deletado_em->humanize(); ?>
+                        </p>
+                    <?php endif; ?>              
                     
                 </div>
 
                 <div class="card-footer bg-primary">
-                    <a 
-                        href="<?php echo site_url('admin/usuarios/editar/'.$usuario->id); ?>" 
-                        class="btn btn-dark btn-sm"
-                    >
-                        <i class="mdi mdi-pencil btn-icon-prepend"></i>
-                        Editar
-                    </a>    
-                    
-                    <a 
-                        href="<?php echo site_url('admin/usuarios/modalExcluir/'.$usuario->id); ?>" 
-                        class="btn btn-danger btn-sm"
-                    >
-                        <i class="mdi mdi-trash-can btn-icon-prepend"></i>
-                        Excluir
-                    </a> 
 
-                    <a 
+                    <?php if ($usuario->deletado_em === null): ?>
+                        <a 
+                            href="<?php echo site_url('admin/usuarios/editar/'.$usuario->id); ?>" 
+                            class="btn btn-dark btn-sm"
+                        >
+                            <i class="mdi mdi-pencil btn-icon-prepend"></i>
+                            Editar
+                        </a>    
+                        
+                        <a 
+                            href="<?php echo site_url('admin/usuarios/modalExcluir/'.$usuario->id); ?>" 
+                            class="btn btn-danger btn-sm"
+                        >
+                            <i class="mdi mdi-trash-can btn-icon-prepend"></i>
+                            Excluir
+                        </a> 
+
+                        <a 
                         href="<?php echo site_url('admin/usuarios/'); ?>" 
                         class="btn btn-light btn-sm"
-                    >
-                        <i class="mdi mdi-arrow-left btn-icon-prepend"></i>
-                        Voltar
-                    </a> 
+                        >
+                            <i class="mdi mdi-arrow-left btn-icon-prepend"></i>
+                            Voltar
+                        </a> 
+                    <?php else: ?>
+
+                        <a data-toogle="tooltip" data-placement="top" title="Desfazer a exclusão" href="<?php echo site_url('admin/usuarios/desfazerexclusao/' . $usuario->id); ?>" class="btn btn-dark btn-sm" style="text-decoration: none;">
+                            <i class="mdi mdi-undo btn-icon-prepend"></i>
+                            Recuperar
+                        </a>
+
+                        <a 
+                        href="<?php echo site_url('admin/usuarios/'); ?>" 
+                        class="btn btn-light btn-sm"
+                        >
+                            <i class="mdi mdi-arrow-left btn-icon-prepend"></i>
+                            Voltar
+                        </a> 
+                    <?php endif; ?> 
                 </div>
             </div>
         </div>

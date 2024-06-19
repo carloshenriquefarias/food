@@ -17,10 +17,10 @@ class Usuarios extends BaseController {
 
     $data = [
       'titulo' => 'Listando os usuarios do sistema',
-      'usuarios' => $this->usuarioModel->withDeleted(true)->findAll(),
+      'usuarios' => $this->usuarioModel->withDeleted(true)->paginate(5),
+      'pager' => $this->usuarioModel->pager,
+      // 'total' => $this->usuarioModel->total(),
     ];
-
-    // session()->remove('sucesso');
 
     return view('Admin/Usuarios/index', $data);
   }
@@ -93,6 +93,10 @@ class Usuarios extends BaseController {
   public function editar($id = null) {
     $usuario = $this->buscaUsuarioOu404($id);
 
+    if($usuario->deletado_em != null){
+      return redirect()->back()->with('info', "O usuario $usuario->nome encontra-se excluido! Portanto, não e possivel edita-lo!");
+    }
+
     $data = [
       'titulo' => "Editando o usuário {$usuario->nome}",
       'usuario' => $usuario,
@@ -104,6 +108,11 @@ class Usuarios extends BaseController {
   public function atualizar($id = null) {
     if($this->request->getPost()) {  //if($this->request->getMethod() === 'post') {  
       $usuario = $this->buscaUsuarioOu404($id);
+
+      if($usuario->deletado_em != null){
+        return redirect()->back()->with('info', "O usuario $usuario->nome encontra-se excluido! Portanto, não e possivel edita-lo!");
+      }
+      
       $post = $this->request->getPost();
 
       if(empty($post['password'])) {
@@ -149,6 +158,10 @@ class Usuarios extends BaseController {
 
   public function excluir($id = null) {
     $usuario = $this->buscaUsuarioOu404($id);
+
+    if($usuario->deletado_em != null){
+      return redirect()->back()->with('info', "O usuario $usuario->nome já encontra-se excluido!");
+    }
 
     if($usuario->is_admin){
       return redirect()->back()->with('info', 'Não é possivel excluir um usuario do tipo ADMINISTRADOR!');
