@@ -72,6 +72,14 @@
                     <?php endforeach ?>
 
                 </table>
+
+                <div class="card-body" style="display: flex; justify-content: center;">
+                    <div class="mt-3">
+                        <?php echo $pager->links(); ?>
+                    </div>
+                </div>
+
+
                 </div>
             </div>
             </div>
