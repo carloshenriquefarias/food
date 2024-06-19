@@ -8,17 +8,21 @@ class UsuarioModel extends Model{
     protected $table            = 'usuarios';
     protected $returnType       = 'App\Entities\Usuario';
     protected $allowedFields    = ['nome', 'email', 'cpf', 'telefone', ];
-    protected $useSoftDeletes   = true;
 
+    //Datas
     protected $useTimestamps        = true;
     protected $createdField         = 'criado_em'; 
     protected $updatedField         = 'atualizado_em';
+    protected $dateFormat           = 'datetime'; // Para uso com o useSoftDeletes
+
+    protected $useSoftDeletes       = true;
     protected $deletedField         = 'deletado_em';
 
+    //Validacoes
     protected $validationRules = [
         'nome'             => 'required|min_length[3]|alpha_numeric_space|max_length[128]',
         'email'            => 'required|max_length[254]|valid_email|is_unique[usuarios.email]',
-        'cpf'              => 'required|exact_length[14]|is_unique[usuarios.cpf]',
+        'cpf'              => 'required|exact_length[14]|validaCpf|is_unique[usuarios.cpf]',
         'telefone'         => 'required',
         'password'         => 'required|max_length[255]|min_length[6]',
         'password_confirmation' => 'required_with[password]|max_length[255]|matches[password]',
@@ -77,5 +81,13 @@ class UsuarioModel extends Model{
         
         unset($this->validationRules['password']);
         unset($this->validationRules['password_confirmation']);
+    }
+
+    public function desfazerExclusao(int $id) {
+        
+        return $this->protect(false)
+        ->where('id', $id)
+        ->set('deletado_em', null)
+        ->update();
     }
 }

@@ -36,6 +36,7 @@
                             <th>Email</th>
                             <th>CPF</th>
                             <th>Ativo</th>
+                            <th>Situação</th>
                         </tr>
                     </thead>
 
@@ -51,8 +52,20 @@
                                 <td><?php echo $usuario->cpf ?></td>
                                 <td>
                                     <?php 
-                                        echo ($usuario->ativo ? '<label class="badge badge-primary">Sim</label>' : '<label class="badge badge-danger">Não</label>') 
+                                        echo ($usuario->ativo && $usuario->deletado_em === null ? '<label class="badge badge-primary">Sim</label>' : '<label class="badge badge-danger">Não</label>') 
                                     ?>
+                                </td>
+                                <td>
+                                    <?php 
+                                        echo ($usuario->deletado_em == null ? '<label class="badge badge-primary">Disponivel</label>' : '<label class="badge badge-danger">Excluido</label>') 
+                                    ?>
+
+                                    <?php if ($usuario->deletado_em !== null): ?>
+                                        <a href="<?php echo site_url('admin/usuarios/desfazerexclusao/' . $usuario->id); ?>" class="badge badge-dark ml-2" style="text-decoration: none;">
+                                            <i class="mdi mdi-undo btn-icon-prepend"></i>
+                                            Recuperar
+                                        </a>
+                                    <?php endif; ?>                                                                                                                                  
                                 </td>
                             </tr>
                         </tbody>

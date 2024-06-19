@@ -17,7 +17,7 @@ class Usuarios extends BaseController {
 
     $data = [
       'titulo' => 'Listando os usuarios do sistema',
-      'usuarios' => $this->usuarioModel->findAll(),
+      'usuarios' => $this->usuarioModel->withDeleted(true)->findAll(),
     ];
 
     // session()->remove('sucesso');
@@ -136,11 +136,51 @@ class Usuarios extends BaseController {
     }
   }
 
+  public function modalExcluir($id = null) {
+    $usuario = $this->buscaUsuarioOu404($id);
+
+    $data = [
+      'titulo' => "Excluindo o usuário {$usuario->nome}",
+      'usuario' => $usuario,
+    ];
+
+    return view('Admin/Usuarios/excluir', $data);
+  }
+
+  public function excluir($id = null) {
+    $usuario = $this->buscaUsuarioOu404($id);
+
+    if($usuario->is_admin){
+      return redirect()->back()->with('info', 'Não é possivel excluir um usuario do tipo ADMINISTRADOR!');
+    }
+    
+    if($usuario) {
+      $this->usuarioModel->protect(false)->delete($id);
+      return redirect()->to(site_url('admin/usuarios'))->with('sucesso', 'O usuário foi excluído com sucesso!');
+    }
+  }
+
+  public function desfazerExclusao($id = null) {
+    $usuario = $this->buscaUsuarioOu404($id);
+
+    if($usuario->deletado_em == null){
+      return redirect()->back()->with('info', 'Apenas usuarios excluidos podem ser recuperados!');
+    }
+
+    if($this->usuarioModel->desfazerExclusao($id)){
+      return redirect()->back()->with('sucesso', 'Recuperação feita com sucesso');
+    } else {
+        return redirect()->back()
+            ->with('errors_model', $this->usuarioModel->errors())
+            ->with('atencao', 'Por favor verifique os erros abaixo')
+            ->withInput();
+    }
+  }
 
   // @param id $id
   // @return objeto usuario
   private function buscaUsuarioOu404(int $id = null) {
-    if (!$id || !$usuario = $this->usuarioModel->where('id', $id)->first()) {
+    if (!$id || !$usuario = $this->usuarioModel->withDeleted(true)->where('id', $id)->first()) {
       throw \CodeIgniter\Exceptions\PageNotFoundException:: forPageNotFound("Não foi possível encontrar $id");
     }
 
