@@ -1,0 +1,11 @@
+/.env
+
+# Ignorar a pasta de dados da Debugbar
+/writable/debugbar/
+
+# Ignorar arquivos de sessions
+/writable/session/
+
+# Ignorar arquivos de logs
+/writable/logs/
+

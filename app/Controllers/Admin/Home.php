@@ -14,4 +14,5 @@ class Home extends BaseController {
     return view('Admin/Home/index', $data);
     // return view('welcome_message', $data);
   }
+
 }
