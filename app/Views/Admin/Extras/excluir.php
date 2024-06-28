@@ -24,10 +24,10 @@
 
                     <h4 class="card-title"><?php echo esc($titulo)?></h4>  
                     
-                    <?php echo form_open('admin/categorias/excluir/'. $categoria->id, ['method' => 'post']); ?>
+                    <?php echo form_open('admin/extras/excluir/'. $extra->id, ['method' => 'post']); ?>
 
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <strong>Atenção!</strong> Deseja realmente excluir esta categoria <?php echo esc($categoria->nome) ?>?
+                            <strong>Atenção!</strong> Deseja realmente excluir este extra <?php echo esc($extra->nome) ?>?
                         </div>
                         
                         <button type="submit" class="btn btn-danger btn-sm">
@@ -36,7 +36,7 @@
                         </button>
 
                         <button class="btn btn-light btn-sm">
-                            <a href="<?php echo site_url('admin/categorias/show/'.$categoria->id); ?>">
+                            <a href="<?php echo site_url('admin/extras/show/'.$extra->id); ?>">
                                 <i class="mdi mdi-arrow-left btn-icon-prepend"></i>
                                 Cancelar
                             </a>  

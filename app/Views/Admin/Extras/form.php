@@ -14,6 +14,13 @@
 </div>
 
 <div class="form-row">
+    <div class="form-group col-md-4">
+        <label for="preco">Preço do extra</label>
+        <input type="text" class="money form-control" name="preco" id="preco" value="<?php echo old('preco', esc($extra->preco)) ?>" placeholder="Preco">
+    </div>
+</div>
+
+<div class="form-row">
 
     <div class="form-group col-md-4">
         <label for="ativo">Ativo</label>

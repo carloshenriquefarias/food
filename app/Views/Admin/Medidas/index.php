@@ -20,12 +20,12 @@
                 <h4 class="card-title"><?php echo $titulo?></h4>
 
                 <div class="ui-widget">
-                    <input id="query" name="query" placeholder="Pesquise por um extra" class="form-control bg-light mb-5"/>
+                    <input id="query" name="query" placeholder="Pesquise por uma medida de produto" class="form-control bg-light mb-5"/>
                 </div>
 
-                <a href="<?php echo site_url('admin/extras/criar'); ?>" class="btn btn-primary btn-md float-right mr-5 text-white" style="text-decoration: none; color: white;">
+                <a href="<?php echo site_url('admin/medidas/criar'); ?>" class="btn btn-primary btn-md float-right mr-5 text-white" style="text-decoration: none; color: white;">
                     <i class="mdi mdi-plus btn-icon-prepend" style="color: white;"></i>
-                    Criar novo extra
+                    Criar nova medida
                 </a>
                 
                 <div class="table-responsive">
@@ -34,37 +34,35 @@
                         <tr>
                             <th>Nome</th>
                             <th>Data de criação</th>
-                            <th>Preço</th>
                             <th>Ativo</th>
                             <th>Situação</th>
                         </tr>
                     </thead>
 
-                    <?php foreach($extras as $extra): ?>
+                    <?php foreach($medidas as $medida): ?>
                         <tbody>
                             <tr>
                                 <td>
-                                    <a href="<?php echo site_url('admin/extras/show/'.$extra->id); ?>">
-                                        <?php echo $extra->nome; ?>
+                                    <a href="<?php echo site_url('admin/medidas/show/'.$medida->id); ?>">
+                                        <?php echo $medida->nome; ?>
                                     </a>                                   
                                 </td>
 
-                                <td><?php echo $extra->criado_em->humanize() ?></td>
-                                <td>R$ <?php echo esc(number_format($extra->preco, 2, ',', '.')); ?></td>
+                                <td><?php echo $medida->criado_em->humanize() ?></td>
 
                                 <td>
                                     <?php 
-                                        echo ($extra->ativo && $extra->deletado_em === null ? '<label class="badge badge-primary">Sim</label>' : '<label class="badge badge-danger">Não</label>') 
+                                        echo ($medida->ativo && $medida->deletado_em === null ? '<label class="badge badge-primary">Sim</label>' : '<label class="badge badge-danger">Não</label>') 
                                     ?>
                                 </td>
 
                                 <td>
                                     <?php 
-                                        echo ($extra->deletado_em == null ? '<label class="badge badge-primary">Disponivel</label>' : '<label class="badge badge-danger">Excluido</label>') 
+                                        echo ($medida->deletado_em == null ? '<label class="badge badge-primary">Disponivel</label>' : '<label class="badge badge-danger">Excluido</label>') 
                                     ?>
 
-                                    <?php if ($extra->deletado_em !== null): ?>
-                                        <a href="<?php echo site_url('admin/extras/desfazerexclusao/' . $extra->id); ?>" class="badge badge-dark ml-2" style="text-decoration: none;">
+                                    <?php if ($medida->deletado_em !== null): ?>
+                                        <a href="<?php echo site_url('admin/medidas/desfazerexclusao/' . $medida->id); ?>" class="badge badge-dark ml-2" style="text-decoration: none;">
                                             <i class="mdi mdi-undo btn-icon-prepend"></i>
                                             Recuperar
                                         </a>
@@ -100,7 +98,7 @@
             $("#query").autocomplete({
                 source: function(request, response) {
                     $.ajax({
-                        url: "<?php echo site_url("admin/extras/procurar")?>",
+                        url: "<?php echo site_url("admin/medidas/procurar")?>",
                         dataType: "json",
                         data: {
                             term: request.term
@@ -108,7 +106,7 @@
                         success: function(data) {
                             if(data.length < 1){
                                 data = [{
-                                    label: "extra não encontrada",
+                                    label: "medida não encontrada",
                                     value: -1
                                 }];
                             }
@@ -122,7 +120,7 @@
                         $(this).val('');
                         return false;
                     } else {
-                        window.location.href = "<?php echo site_url("admin/extras/show")?>/" + ui.item.id;
+                        window.location.href = "<?php echo site_url("admin/medidas/show")?>/" + ui.item.id;
                     }
                 }
             });
