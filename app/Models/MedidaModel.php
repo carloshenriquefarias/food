@@ -4,13 +4,13 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ExtraModel extends Model
+class MedidaModel extends Model
 {
-    
-    protected $table            = 'extras';
-    protected $returnType       = 'App\Entities\Extra';
+
+    protected $table            = 'medidas';
+    protected $returnType       = 'App\Entities\Medida';
     protected $useSoftDeletes   = true;
-    protected $allowedFields    = ['nome', 'slug', 'preco', 'descricao', 'ativo'];
+    protected $allowedFields    = ['nome', 'descricao', 'ativo'];
 
     // Dates
     protected $useTimestamps = true;
@@ -21,30 +21,16 @@ class ExtraModel extends Model
 
     // Validation
     protected $validationRules = [
-        'nome'=> 'required|min_length[2]|alpha_numeric_space|is_unique[extras.nome]|max_length[128]',
+        'nome'=> 'required|min_length[2]|alpha_numeric_space|is_unique[medidas.nome]|max_length[128]',
     ];
 
     protected $validationMessages = [
         'nome' => [
             'required' => 'O campo nome é obrigatorio',
-            'is_unique' => 'Esta extra já existe! Escolha outro nome.',
+            'is_unique' => 'Esta medida já existe! Escolha outro nome.',
         ],
     ];
 
-    protected $beforeInsert = ['criaSlug'];
-    protected $beforeUpdate = ['criaSlug'];
-
-    protected function criaSlug(array $data) {
-        if (isset($data['data']['nome'])) {
-            $data['data']['slug'] = mb_url_title($data['data']['nome'], '-', true);
-        }
-
-        return $data;
-    }
-
-    // Uso o contoller categorias ataves do metodo autocomplete
-    // @param string $term
-    // @return array categorias
     public function procurar($term) {
         if ($term === null) {
             return [];
@@ -65,6 +51,5 @@ class ExtraModel extends Model
         ->set('deletado_em', null)
         ->update();
     }
-
-
+   
 }
