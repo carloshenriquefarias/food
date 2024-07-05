@@ -16,6 +16,24 @@
                 <div class="card-body">
                     <h4 class="card-title"><?php echo esc($titulo)?></h4>                    
                     <h4 class="card-title"><?php echo esc($produto->nome)?></h4>
+
+                    <div class="card" style="width: 18rem;">
+                        <?php if($produto->imagem): ?>
+                            <img class="card-img-top" src="<?php echo site_url("admin/produtos/imagem/$produto->imagem") ?>" alt="<?php echo esc($produto->nome) ?>">
+                        <?php else: ?>
+                            <img class="card-img-top" src="<?php echo site_url('admin/images/produto-sem-imagem.png') ?>" alt="Produto sem imagem">
+                        <?php endif; ?>
+                    </div>
+
+                    <a 
+                        href="<?php echo site_url('admin/produtos/editarimagem/'.$produto->id); ?>" 
+                        class="btn btn-outline-primary btn-sm mt-3 mb-1"
+                    >
+                        <i class="mdi mdi-image btn-icon-prepend"></i>
+                        Alterar imagem
+                    </a>
+
+                    <hr/>
                     
                     <p class="card-text">
                         <strong>Nome:</strong> <?php echo esc($produto->nome)?>                        
@@ -59,7 +77,15 @@
                         >
                             <i class="mdi mdi-pencil btn-icon-prepend"></i>
                             Editar
-                        </a>    
+                        </a>  
+                        
+                        <a 
+                            href="<?php echo site_url('admin/produtos/extras/'.$produto->id); ?>" 
+                            class="btn btn-success btn-sm"
+                        >
+                            <i class="mdi mdi-arrow-up btn-icon-prepend"></i>
+                            Extras
+                        </a>
                         
                         <a 
                             href="<?php echo site_url('admin/produtos/modalExcluir/'.$produto->id); ?>" 
